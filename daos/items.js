@@ -10,15 +10,34 @@ module.exports.getAll = () => {
 }
 
 module.exports.getById = (itemId) => {
-  // TODO: complete
+  let result;
+
+  itemsModel.items.forEach( (item) => {
+    if(item.id === itemId) {
+      result = item;
+      return result;
+    }
+  }, result);
+
+  return result;
 }
 
 module.exports.deleteById = async (itemId) => {
-    // TODO: complete
+  itemsModel.items.forEach( (item, index)  => {
+    if(item.id === itemId) {
+      itemsModel.items.splice(index, 1);
+    }
+  });
 }
 
 module.exports.updateById = async (itemId, newObj) => {
-    // TODO: complete
+  itemsModel.items.forEach( (item, index) => {
+    if(item.id === itemId) {
+      newObj['id'] = item.id 
+      itemsModel.items[index] =  newObj;
+    }
+  });
+  return itemsModel.items;
 }
 
 module.exports.create = async (item) => {
